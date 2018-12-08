@@ -1,0 +1,86 @@
+@import "./vars.scss";
+@import "./colors.scss";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+a, input, select {
+  color: inherit;
+  text-decoration: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+html,
+body {
+  width: 100%;
+}
+
+svg {
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $secondaryFontFamily;
+}
+
+img {
+  display: block;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-input-placeholder {
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 95px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.button {
+  border: none;
+  padding: 10px 15px;
+  font-family: $secondaryFontFamily;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1000px rgba(#000, 0.5);
+  }
+
+  &-primary {
+    background: $primary;
+    color: #fff;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  &--big {
+    font-size: 28px;
+    font-weight: 400;
+    padding: 16px 38px;
+  }
+}
