@@ -1,0 +1,12 @@
+.image-container {
+    border-radius: 50px;
+    border: 3px solid white;
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    box-sizing: content-box;
+
+    img {
+        width: 100%;
+    }
+}
