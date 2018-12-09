@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GameCard, UserImage } from '@components'
+import { GameCard, UserImage, Image } from '@components'
 import './App.scss';
 import './static/styles/normalize.scss'
 import './static/styles/general.scss'
@@ -12,6 +12,15 @@ class App extends Component {
         <GameCard name="Red Dead Redemption 2" image="https://images-na.ssl-images-amazon.com/images/I/91C8piUiI0L._SX342_.jpg"/>
         <GameCard name="God of Warr" image="https://images-na.ssl-images-amazon.com/images/I/51po2bu7VnL.jpg"/>
         <UserImage image="https://i.pinimg.com/originals/76/34/f0/7634f00d8f0e15f697e5cf9fb99a0d47.jpg"/>
+     
+        <div>
+          { Image.ICONS.Close }
+          { Image.ICONS.Exit }
+          { Image.ICONS.Gamepad }
+          { Image.ICONS.Order }
+          { Image.ICONS.Search }
+          { Image.ICONS.Videogame }
+        </div>
       </div>
     );
   }
