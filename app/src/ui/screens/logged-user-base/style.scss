@@ -1,0 +1,76 @@
+@import '../../../static/styles/colors.scss';
+
+.base-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+
+  .sidebar {
+    background-color: $primary;
+    width: 13%;
+    height: 100vh;
+  
+    header {
+      height: 18%;
+      background-color: $secondary;
+      display: flex;
+      flex-direction: column-reverse;
+
+    .bottom-content {
+        height: 75%;
+        background-color: darken($color: $secondary, $amount: 10%);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .user {
+          position: fixed;
+          top: 25px;
+
+          img {
+            border-radius: 50px;
+            border: 2px solid white;
+            width: 75px;
+            height: 75px;
+            box-sizing: content-box;
+            margin-bottom: 10px;
+          }
+  
+          .greetings {
+            color: white;
+            font-size: 15px;
+  
+            .name {
+              font-weight: bold;
+            }
+          }
+
+          .quit {
+            height: 20px;
+            margin-top: 2px;
+            display: flex;
+            justify-content: center;
+
+            button {
+              width: 40px;
+              border: none;
+              color: white;
+              font-size: 12px;
+              background: none;
+              vertical-align: middle;
+              padding: 0;
+
+
+              svg {
+                fill: $primary;
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

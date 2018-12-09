@@ -1,0 +1,1 @@
+export { LoggedUserBase } from './logged-user-base/logged-user-base.screen'
