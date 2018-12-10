@@ -4,6 +4,7 @@ import GamepadIcon from './images/gamepad'
 import OrderIcon from './images/order'
 import SearchIcon from './images/search'
 import VideogameIcon from './images/videogame'
+import ArrowRightIcon from './images/arrow-right'
 
 export class Image {
 
@@ -13,6 +14,7 @@ export class Image {
     Gamepad: GamepadIcon,
     Order: OrderIcon,
     Search: SearchIcon,
-    Videogame: VideogameIcon
+    Videogame: VideogameIcon,
+    ArrowRight: ArrowRightIcon
   }
 }

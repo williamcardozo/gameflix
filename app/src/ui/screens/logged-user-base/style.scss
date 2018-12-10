@@ -66,11 +66,48 @@
               svg {
                 fill: $primary;
                 vertical-align: middle;
+                width: 15px;
               }
             }
           }
         }
       }
+    }
+
+    .menu {
+      color: #ccc;
+      font-size: 14px;
+
+      a {
+        margin: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        vertical-align: middle;
+
+        .icon {
+          margin-right: 15px;
+        }
+
+        span{
+          vertical-align: middle;
+        }
+
+        svg {
+          vertical-align: middle;
+          fill: #ccc;
+          width: 12px;
+        }
+
+        &:focus {
+          color: white;
+          font-weight: bold;
+
+          svg {
+            fill: $secondary;
+          }
+        }
+      }   
     }
   }
 }

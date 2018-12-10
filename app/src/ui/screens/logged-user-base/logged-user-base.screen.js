@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { GameCard, Image } from '@components'
+import { Image } from '@components'
+import { routes } from './routes'
+import { Link, Route } from 'react-router-dom'
 import './style.scss'
+import { GamesScreen } from '../games/games.screen';
 
 const SidebarHeader = (props) => (
   <header>
@@ -20,27 +23,40 @@ const SidebarHeader = (props) => (
   </header>
 )
 
-export class LoggedUserBase extends Component {
+const MenuItem = ({icon, label, page}) => (
+  <Link to={page}>
+    <span className="item">
+      <span className="icon">
+        {icon}
+      </span>
+      <span>{label}</span>
+    </span>
+    {Image.ICONS.ArrowRight}
+  </Link>
+)
 
+export class LoggedUserBase extends Component {
 
   render() {
     return (
       <div className="base-container">
         <div className="sidebar">
-          <SidebarHeader {...props} />
+          
+          <SidebarHeader {...this.props} />
+          <div className="menu">
+            <MenuItem icon={Image.ICONS.Videogame} label="Games" page="/games"/>
+            <MenuItem icon={Image.ICONS.Order} label="Pedidos" page="/orders" />
+          </div>
         </div>
         <div className="screen-content">
-          <GameCard name="Monster Hunter World" image="https://s3.amazonaws.com/comparegame/thumbnails/43130/large.jpg" />
-          <GameCard name="Red Dead Redemption 2" image="https://images-na.ssl-images-amazon.com/images/I/91C8piUiI0L._SX342_.jpg" />
-          <GameCard name="God of Warr" image="https://images-na.ssl-images-amazon.com/images/I/51po2bu7VnL.jpg" />
-
-          <div>
-            {Image.ICONS.Close}
-            {Image.ICONS.Gamepad}
-            {Image.ICONS.Order}
-            {Image.ICONS.Search}
-            {Image.ICONS.Videogame}
-          </div>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.main}
+            />
+          ))}
         </div>
       </div>
     )
