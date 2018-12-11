@@ -3,6 +3,7 @@
 .base-container {
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
   width: 100%;
 
   .sidebar {
@@ -10,7 +11,7 @@
     width: 13%;
   
     header {
-      height: 18%;
+      height: 175px;
       background-color: $secondary;
       display: flex;
       flex-direction: column-reverse;
