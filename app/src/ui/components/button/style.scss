@@ -1,0 +1,26 @@
+@import '../../../static/styles/colors.scss';
+
+.button{
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  height: 25px;
+  width: 70px;
+  border-radius: 5px;
+
+  .button-primary {
+    background: $primary;
+    color: $secondary;
+  }
+  .button-secondary {
+    background: $secondary;
+    color: $primary;
+  }
+
+  &:disabled {
+    background: grey;
+    color: white;
+  }
+}
+  
+  
