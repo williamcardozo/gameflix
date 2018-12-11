@@ -1,0 +1,31 @@
+@import '../../../static/styles/colors.scss';
+
+.input-container {
+
+    input {
+        color: #4F4F4F; 
+        padding: 15px;
+        border-radius: 5px;
+        width: 100%; 
+        box-sizing: border-box; 
+        letter-spacing: 1px;
+        border: 1px solid $primary; 
+        font-style: normal;
+        font-weight: normal;
+        line-height: normal;
+        font-size: 13px;
+        margin-top: 10px;
+    
+        &:focus {
+            outline: none;
+            box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.12);
+        }
+    
+    }
+    
+    label {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+}
