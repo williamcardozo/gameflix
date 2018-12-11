@@ -1,15 +1,43 @@
 @import '../../../static/styles/colors.scss';
 
-.add-game-button {
-    width: 160px;
-    height: 40px;
-    font-style: normal;
-    font-weight: bold;
-    line-height: normal;
-    font-size: 14px;
-    text-align: center;
+.games-container {
+	width: 90%;
 
-    svg {
-        fill: $secondary;
-    }
+	header{
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+
+	.input-container {
+		width: 30%;
+	}
+
+	.add-game-button {
+		width: 160px;
+		height: 40px;
+		font-style: normal;
+		font-weight: bold;
+		line-height: normal;
+		font-size: 14px;
+		text-align: center;
+
+		svg {
+				fill: $secondary;
+		}
+	}
+
+	.games-list {
+		margin-top: 50px;
+		margin-bottom: 30px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		.card-container {
+			margin: 20px;
+		}
+	}
 }
