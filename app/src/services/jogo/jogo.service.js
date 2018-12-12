@@ -13,4 +13,14 @@ export class JogoService extends BaseService {
 
     return super.post(data)
   }
+
+  editGame({id, name, imageUrl}) {
+    const data = {
+      id: id,
+      nome: name,
+      url_imagem: imageUrl
+    }
+
+    return super.put(data)
+  }
 }

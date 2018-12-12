@@ -18,7 +18,7 @@ export const BaseForm = ({
 				<div>
 					<h3>{title}</h3>
 					<form className="form-game" onSubmit={submitAction}>
-            <Input hidden="true" hidden value={gameId} name="gameId"/>
+            <Input hidden="true" readOnly hidden value={gameId} name="gameId"/>
 						<Input readOnly={readonly} label="Nome" placeholder="Nome do jogo" 
 							type="text" onChange={changeAction} value={gameName}
 							name="gameName"/>

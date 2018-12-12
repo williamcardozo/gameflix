@@ -12,7 +12,8 @@ export class GamesScreen extends Component {
 		gameImageUrl: '',
 		gameId: '',
 		shouldRenderForm: false,
-		shouldRenderDetail: false
+		shouldRenderDetail: false,
+		shouldRenderEditForm: false
 	}
 	jogoService = new JogoService()
 
@@ -39,6 +40,13 @@ export class GamesScreen extends Component {
 	onAddGameClick = () => {
 		this.setState({ 
 			shouldRenderForm: !this.state.shouldRenderForm, 
+			shouldRenderDetail: false
+		})
+	}
+
+	onEditGameClick = () => {
+		this.setState({ 
+			shouldRenderEditForm: true, 
 			shouldRenderDetail: false
 		})
 	}
@@ -72,6 +80,21 @@ export class GamesScreen extends Component {
 		})
 	}
 
+	editGame = (event) => {
+		event.preventDefault()
+
+		const data = {
+			id: this.state.gameId,
+			name: this.state.gameName,
+			imageUrl: this.state.gameImageUrl
+		}
+
+		this.jogoService.editGame(data).then(() =>  {
+			this.setState({ shouldRenderEditForm: false })	
+			this.getGames()
+		})
+	}
+
 	deleteGame = (event) => {
 		event.preventDefault()
 
@@ -92,6 +115,18 @@ export class GamesScreen extends Component {
 		)
 	}
 
+	renderEditForm() {
+		const { gameName, gameImageUrl } = this.state
+
+		return (
+			<BaseForm title="Editar Jogo" changeAction={this.handleChange} actions={() => (
+				<Button customStyle="game-button" typeClass="primary" type="submit">
+					Salvar
+				</Button>
+			)} submitAction={this.editGame} gameName={gameName} gameImageUrl={gameImageUrl} gameId={this.state.gameId}/>
+		)
+	}
+
 	renderGameDetail() {
 		return (
 			<BaseForm title="Detalhe Jogo" actions={() => (
@@ -99,7 +134,7 @@ export class GamesScreen extends Component {
 					<Button customStyle="game-button" typeClass="primary" type="button">
 						Alugar
 					</Button>
-					<Button customStyle="game-button" typeClass="primary" type="button">
+					<Button customStyle="game-button" typeClass="primary" type="button" onClick={this.onEditGameClick}>
 						Editar
 					</Button>
 					<Button customStyle="game-button delete-game-button" typeClass="secondary" type="button" onClick={this.deleteGame}>
@@ -128,6 +163,7 @@ export class GamesScreen extends Component {
 							</Button>
 						</header>
 						{ this.state.shouldRenderForm && this.renderAddForm() }
+						{ this.state.shouldRenderEditForm && this.renderEditForm() }
 						{ this.state.shouldRenderDetail && this.renderGameDetail() }
 						<section className="games-list">
 							{ this.renderGameCard() }
