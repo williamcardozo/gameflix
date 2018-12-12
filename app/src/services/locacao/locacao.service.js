@@ -5,6 +5,10 @@ export class LocacaoService extends BaseService {
     super('locacao.php')
   }
 
+  getLocacao() {
+    return super.get()
+  }
+
   rentGame({id, renterName, date}) {
     const data = {
       jogo_id: id,
