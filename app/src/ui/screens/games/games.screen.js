@@ -37,7 +37,10 @@ export class GamesScreen extends Component {
 	}
 
 	onAddGameClick = () => {
-		this.setState({ shouldRenderForm: !this.state.shouldRenderForm})
+		this.setState({ 
+			shouldRenderForm: !this.state.shouldRenderForm, 
+			shouldRenderDetail: false
+		})
 	}
 
 	onGameCardClick  = (game) => {
@@ -69,6 +72,15 @@ export class GamesScreen extends Component {
 		})
 	}
 
+	deleteGame = (event) => {
+		event.preventDefault()
+
+		this.jogoService.delete({id: this.state.gameId}).then(() =>  {
+			this.setState({ shouldRenderDetail: false })	
+			this.getGames()
+		})
+	}
+
 	renderAddForm() {
 		const { gameName, gameImageUrl } = this.state
 		return (
@@ -90,7 +102,7 @@ export class GamesScreen extends Component {
 					<Button customStyle="game-button" typeClass="primary" type="button">
 						Editar
 					</Button>
-					<Button customStyle="game-button delete-game-button" typeClass="secondary" type="button">
+					<Button customStyle="game-button delete-game-button" typeClass="secondary" type="button" onClick={this.deleteGame}>
 						<span>{Image.ICONS.Close}  Deletar</span>
 					</Button>
 				</div>

@@ -26,6 +26,8 @@ export class BaseService {
   }
 
   delete(body) {
-    return this.httpService.delete(this.baseUrl, body)
+    return this.httpService.delete(this.baseUrl, {
+      params: body
+     })
   }
 }
