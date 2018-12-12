@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import { LocacaoService } from "@services"
 import { TableLocacao } from '@components'
 import moment from "moment"
@@ -35,14 +35,14 @@ export class OrdersScreen extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <h2>Pedidos</h2>
         <div className="games-container">
 				<section className="games-list">
 						<TableLocacao locacao={this.state.locacoes} />
 					</section>
         </div>
-      </React.Fragment>
+      </Fragment>
     )
   }
 }
