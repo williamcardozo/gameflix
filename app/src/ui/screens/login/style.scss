@@ -1,14 +1,19 @@
 @import '../../../static/styles/colors.scss';
 
-.base-container {
+.login-container {
   display: flex;
+  background-color: #f4f4f4;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   width: 100%;
 
-  .form-game {
+  .logo {
+    width: 260px;
+  }
+
+  .form-login {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -21,7 +26,7 @@
     }
   }
 
-  .add-game-button {
+  .login-button {
 		width: 160px;
 		height: 40px;
 		font-style: normal;

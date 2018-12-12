@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Input, Button, Image } from '@components'
+import { Redirect } from 'react-router-dom'
+import { LOGO } from '@assets'
+import { Input, Button } from '@components'
 import './style.scss'
-import { LoginService } from '../../../services/login/login.service';
+import { LoginService, UserService } from '@services';
 
 export class LoginScreen extends Component {
 
   state = {
     login: '',
-    senha: '',
+    password: '',
+    shouldRedirectToGames: false
   }
-
+  userService = new UserService()
   loginService = new LoginService()
 
   handleChange = (event) => {
@@ -19,23 +21,37 @@ export class LoginScreen extends Component {
     this.setState({ [target.name]: target.value })
   }
 
-  login(){
-    this.loginService.post(this.state).then()
+  login= (event) => {
+    event.preventDefault()
+
+    const data = {
+      login: this.state.login,
+      senha: this.state.password
+    }
+
+    this.loginService.post(data).then((result) => {
+      this.userService.saveUser(result)
+      this.setState({ shouldRedirectToGames: true })
+    })
   }
 
   render() {
+    if(this.state.shouldRedirectToGames) {
+      return <Redirect to="/games" />
+    }
+
     return (
-      <div className="base-container">
-        {Image.ICONS.Videogame}
-        <form className="form-game" onSubmit={this.login}>
+      <div className="login-container">
+        <img src={LOGO} className="logo" alt="logo" />
+        <form className="form-login" onSubmit={this.login} method="POST">
           <Input label="Login" placeholder="Login"
             type="text" onChange={this.handleChange} value={this.state.login}
             name="login" />
           <Input label="Senha" placeholder="Senha"
-            type="text" onChange={this.handleChange} value={this.state.senha}
-            name="senha" />
-          <Button className="add-game-button" typeClass="button-primary" type="submit">
-            <span>Logar</span>
+            type="password" onChange={this.handleChange} value={this.state.password}
+            name="password" />
+          <Button customStyle="login-button" typeClass="primary" type="submit">
+            Logar
           </Button>
         </form>
       </div>
