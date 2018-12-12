@@ -48,7 +48,7 @@ export class LoggedUserBaseScreen extends Component {
 
   componentDidMount() {
     const user = this.userService.getUser()
-    debugger
+
     if (user) {
       this.setState({ user })
     } else {

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { GameCard, Input, Button, Image } from '@components'
 import './styles.scss'
-import { JogoService } from '@services';
+import { JogoService, LocacaoService } from '@services';
 import { BaseForm } from './sections/base-form.section'
+import moment from 'moment'
 
 export class GamesScreen extends Component {
 	state = {
@@ -11,11 +12,14 @@ export class GamesScreen extends Component {
 		gameName: '',
 		gameImageUrl: '',
 		gameId: '',
+		renterName: '',
 		shouldRenderForm: false,
 		shouldRenderDetail: false,
-		shouldRenderEditForm: false
+		shouldRenderEditForm: false,
+		shouldRenderRentForm: false
 	}
 	jogoService = new JogoService()
+	locacaoService =  new LocacaoService()
 
 	componentDidMount() {
 		this.getGames()
@@ -51,6 +55,13 @@ export class GamesScreen extends Component {
 		})
 	}
 
+	onRentGameClick = () => {
+		this.setState({ 
+			shouldRenderRentForm: true, 
+			shouldRenderDetail: false
+		})
+	}
+
 	onGameCardClick  = (game) => {
 		this.setState({ shouldRenderDetail: true, 
 			shouldRenderForm: false,
@@ -75,8 +86,22 @@ export class GamesScreen extends Component {
 		}
 
 		this.jogoService.addGame(data).then(() =>  {
-			this.setState({ shouldRenderForm: false })	
+			this.setState({ shouldRenderForm: false, gameId: '', gameName: '', gameImageUrl: '' })	
 			this.getGames()
+		})
+	}
+
+	rentGame = (event) => {
+		event.preventDefault()
+
+		const data = {
+			id: this.state.gameId,
+			renterName: this.state.renterName,
+			date: moment().format('DD-MM-YYYY')
+		}
+
+		this.locacaoService.rentGame(data).then(() =>  {
+			this.setState({ shouldRenderRentForm: false, gameId: '', gameName: '', gameImageUrl: '', renterName: '' })	
 		})
 	}
 
@@ -90,7 +115,7 @@ export class GamesScreen extends Component {
 		}
 
 		this.jogoService.editGame(data).then(() =>  {
-			this.setState({ shouldRenderEditForm: false })	
+			this.setState({ shouldRenderEditForm: false, gameId: '', gameName: '', gameImageUrl: '' })	
 			this.getGames()
 		})
 	}
@@ -131,7 +156,7 @@ export class GamesScreen extends Component {
 		return (
 			<BaseForm title="Detalhe Jogo" readOnly actions={() => (
 				<div className="game-detail-actions">
-					<Button customStyle="game-button" typeClass="primary" type="button">
+					<Button customStyle="game-button" typeClass="primary" type="button" onClick={this.onRentGameClick}>
 						Alugar
 					</Button>
 					<Button customStyle="game-button" typeClass="primary" type="button" onClick={this.onEditGameClick}>
@@ -142,6 +167,30 @@ export class GamesScreen extends Component {
 					</Button>
 				</div>
 			)} gameName={this.state.gameName} gameImageUrl={this.state.gameImageUrl} gameId={this.state.gameId}/>
+		)
+	}
+
+	renderRentForm() {
+		return (
+			<div className="form-container-rent">
+				<div className="form-container-rent-wrapper">
+					<div>
+						<h3>Aluguel de {this.state.gameName}</h3>
+						<form onSubmit={this.rentGame}>
+							<Input label="Nome do Locador" placeholder="Nome do locador" 
+								type="text" onChange={this.handleChange} value={this.state.renterName}
+								name="renterName"/>
+							
+							<Button customStyle="game-button" typeClass="primary" type="submit">
+								Salvar
+							</Button>
+						</form>
+					</div>
+					<GameCard name={this.state.gameName} image={this.state.gameImageUrl} />		
+				</div>
+			
+				<div className="line"></div>
+			</div>			
 		)
 	}
 
@@ -165,6 +214,7 @@ export class GamesScreen extends Component {
 						{ this.state.shouldRenderForm && this.renderAddForm() }
 						{ this.state.shouldRenderEditForm && this.renderEditForm() }
 						{ this.state.shouldRenderDetail && this.renderGameDetail() }
+						{ this.state.shouldRenderRentForm && this.renderRentForm() }
 						<section className="games-list">
 							{ this.renderGameCard() }
 						</section>
