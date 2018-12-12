@@ -9,7 +9,8 @@ export const BaseForm = ({
 	submitAction, 
 	changeAction, 
 	gameName, 
-	gameImageUrl 
+  gameImageUrl, 
+  gameId
 }) =>  {
 	return (
 		<div className="form-container">
@@ -17,10 +18,11 @@ export const BaseForm = ({
 				<div>
 					<h3>{title}</h3>
 					<form className="form-game" onSubmit={submitAction}>
-						<Input readonly={readonly} label="Nome" placeholder="Nome do jogo" 
+            <Input hidden="true" hidden value={gameId} name="gameId"/>
+						<Input readOnly={readonly} label="Nome" placeholder="Nome do jogo" 
 							type="text" onChange={changeAction} value={gameName}
 							name="gameName"/>
-						<Input readonly={readonly} label="Url da Imagem" placeholder="Url da Imagem do jogo" 
+						<Input readOnly={readonly} label="Url da Imagem" placeholder="Url da Imagem do jogo" 
 							type="text" onChange={changeAction} value={gameImageUrl}
 							name="gameImageUrl"/>
 

@@ -9,6 +9,7 @@
     align-items: center; 
 
     .form-game {
+      width: 300px;
       margin-bottom: 20px;
       display: flex;
       flex-direction: column;
@@ -19,10 +20,23 @@
         width: 100%;
       }
 
-      button {
+      .game-button {
         width: 80px;
       }
+
+      .game-detail-actions {
+        display: flex;
+        justify-content: space-between;
+
+        .delete-game-button {
+          width: 120px;
+          
+          span {
+            display: flex;
+          }     
+        }
     }
+  }
 
     .card-container {
       margin-left: 80px;

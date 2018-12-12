@@ -1,6 +1,6 @@
 @import '../../../static/styles/colors.scss';
 
-.button{
+.button {
   cursor: pointer;
   border: 0;
   outline: 0;
@@ -8,14 +8,7 @@
   width: 70px;
   border-radius: 5px;
 
-  .button-primary {
-    background: $primary;
-    color: $secondary;
-  }
-  .button-secondary {
-    background: $secondary;
-    color: $primary;
-  }
+ 
 
   &:disabled {
     background: grey;
@@ -23,4 +16,13 @@
   }
 }
   
+.primary {
+  background: $primary;
+  color: $secondary;
+}
+
+.secondary {
+  background-color: $secondary;
+  color: $primary;
+}
   

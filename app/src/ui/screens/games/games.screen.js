@@ -10,7 +10,9 @@ export class GamesScreen extends Component {
 		games: [],
 		gameName: '',
 		gameImageUrl: '',
-		shouldRenderForm: false
+		gameId: '',
+		shouldRenderForm: false,
+		shouldRenderDetail: false
 	}
 	jogoService = new JogoService()
 
@@ -21,7 +23,7 @@ export class GamesScreen extends Component {
 	getGames() {
 		this.jogoService.get().then(
 			result => {
-				const games = result.data.map( g => ({ name: g.nome, image: g.url_imagem }))
+				const games = result.data.map( game => ({ id: game.id, name: game.nome, image: game.url_imagem }))
 				this.setState({ games, initialGames: games })
 			}
 		)
@@ -36,6 +38,16 @@ export class GamesScreen extends Component {
 
 	onAddGameClick = () => {
 		this.setState({ shouldRenderForm: !this.state.shouldRenderForm})
+	}
+
+	onGameCardClick  = (game) => {
+		debugger
+		this.setState({ shouldRenderDetail: true, 
+			shouldRenderForm: false,
+			gameName: game.name, 
+			gameId: game.id, 
+			gameImageUrl: game.image 
+		})
 	}
 
 	handleChange = (event) => {
@@ -62,8 +74,8 @@ export class GamesScreen extends Component {
 		const { gameName, gameImageUrl } = this.state
 		return (
 			<BaseForm title="Novo Jogo" changeAction={this.handleChange} actions={() => (
-				<Button className="add-game-button" typeClass="button-primary" type="submit">
-					<span>Salvar</span>
+				<Button customStyle="game-button" typeClass="primary" type="submit">
+					Salvar
 				</Button>
 			)} submitAction={this.addGame} gameName={gameName} gameImageUrl={gameImageUrl}/>
 		)
@@ -72,16 +84,24 @@ export class GamesScreen extends Component {
 	renderGameDetail() {
 		return (
 			<BaseForm title="Detalhe Jogo" actions={() => (
-				<Button className="add-game-button" typeClass="button-primary" type="submit">
-					<span>Salvar</span>
-				</Button>
-			)} readonly />
+				<div className="game-detail-actions">
+					<Button customStyle="game-button" typeClass="primary" type="button">
+						Alugar
+					</Button>
+					<Button customStyle="game-button" typeClass="primary" type="button">
+						Editar
+					</Button>
+					<Button customStyle="game-button delete-game-button" typeClass="secondary" type="button">
+						<span>{Image.ICONS.Close}  Deletar</span>
+					</Button>
+				</div>
+			)} gameName={this.state.gameName} gameImageUrl={this.state.gameImageUrl} gameId={this.state.gameId}/>
 		)
 	}
 
 	renderGameCard() {
 		return this.state.games.map(game => (
-			<GameCard name={game.name} image={game.image} />
+			<GameCard name={game.name} image={game.image} onClick={() => this.onGameCardClick(game)} />
 		))
 	}
 
@@ -92,11 +112,12 @@ export class GamesScreen extends Component {
 					<div className="games-container">
 						<header>
 							<Input label="Buscar Jogos" placeholder="Digite o nome do seu jogo" type="text" onChange={this.onSearchChange}/>
-							<Button className="add-game-button" typeClass="button-primary" onClick={this.onAddGameClick}>
+							<Button customStyle="game-button" typeClass="primary" onClick={this.onAddGameClick}>
 								<span>{Image.ICONS.Gamepad} Adicionar Jogo</span>
 							</Button>
 						</header>
 						{ this.state.shouldRenderForm && this.renderAddForm() }
+						{ this.state.shouldRenderDetail && this.renderGameDetail() }
 						<section className="games-list">
 							{ this.renderGameCard() }
 						</section>
