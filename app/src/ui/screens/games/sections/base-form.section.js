@@ -5,7 +5,7 @@ import './styles.scss'
 export const BaseForm = ({
 	title, 
 	actions, 
-	readonly, 
+	readOnly, 
 	submitAction, 
 	changeAction, 
 	gameName, 
@@ -19,10 +19,10 @@ export const BaseForm = ({
 					<h3>{title}</h3>
 					<form className="form-game" onSubmit={submitAction}>
             <Input hidden="true" readOnly hidden value={gameId} name="gameId"/>
-						<Input readOnly={readonly} label="Nome" placeholder="Nome do jogo" 
+						<Input readOnly={readOnly} label="Nome" placeholder="Nome do jogo" 
 							type="text" onChange={changeAction} value={gameName}
 							name="gameName"/>
-						<Input readOnly={readonly} label="Url da Imagem" placeholder="Url da Imagem do jogo" 
+						<Input readOnly={readOnly} label="Url da Imagem" placeholder="Url da Imagem do jogo" 
 							type="text" onChange={changeAction} value={gameImageUrl}
 							name="gameImageUrl"/>
 

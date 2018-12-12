@@ -129,7 +129,7 @@ export class GamesScreen extends Component {
 
 	renderGameDetail() {
 		return (
-			<BaseForm title="Detalhe Jogo" actions={() => (
+			<BaseForm title="Detalhe Jogo" readOnly actions={() => (
 				<div className="game-detail-actions">
 					<Button customStyle="game-button" typeClass="primary" type="button">
 						Alugar
