@@ -34,6 +34,10 @@ export class GamesScreen extends Component {
 		)
 	}
 
+	cleanFormState() {
+		this.setState({ gameId: '', gameName: '', gameImageUrl: '', renterName: '' })
+	}
+
 	onSearchChange = (event) => {
 		const target = event.target
 
@@ -44,8 +48,12 @@ export class GamesScreen extends Component {
 	onAddGameClick = () => {
 		this.setState({ 
 			shouldRenderForm: !this.state.shouldRenderForm, 
-			shouldRenderDetail: false
+			shouldRenderDetail: false,
+			shouldRenderEditForm: false,
+			shouldRenderRentForm: false,
 		})
+
+		this.cleanFormState()
 	}
 
 	onEditGameClick = () => {
@@ -101,7 +109,8 @@ export class GamesScreen extends Component {
 		}
 
 		this.locacaoService.rentGame(data).then(() =>  {
-			this.setState({ shouldRenderRentForm: false, gameId: '', gameName: '', gameImageUrl: '', renterName: '' })	
+			this.setState({ shouldRenderRentForm: false })	
+			this.cleanFormState()
 		})
 	}
 
@@ -115,7 +124,8 @@ export class GamesScreen extends Component {
 		}
 
 		this.jogoService.editGame(data).then(() =>  {
-			this.setState({ shouldRenderEditForm: false, gameId: '', gameName: '', gameImageUrl: '' })	
+			this.setState({ shouldRenderEditForm: false })	
+			this.cleanFormState()
 			this.getGames()
 		})
 	}
