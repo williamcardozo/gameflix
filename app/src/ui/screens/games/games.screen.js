@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { GameCard, Input, Button, Image } from '@components'
 import './styles.scss'
+import { JogoService } from '../../../services/jogo/jogo.service';
 
 export class GamesScreen extends Component {
 	state = {
@@ -12,28 +13,19 @@ export class GamesScreen extends Component {
 	}
 
 	componentDidMount() {
-		const games = [ 
-			{ 
-				name: 'Monster Hunter World', 
-				image: 'https://s3.amazonaws.com/comparegame/thumbnails/43130/large.jpg' 
-			}, 
-			{
-				name: 'Red Dead Redemption 2', 
-				image: 'https://images-na.ssl-images-amazon.com/images/I/91C8piUiI0L._SX342_.jpg' 
-			}, 
-			{
-				name: 'God of War', 
-				image: 'https://images-na.ssl-images-amazon.com/images/I/51po2bu7VnL.jpg' 
-			}  
-		]
-
-		this.setState({ games, initialGames: games })
+		const jogoService = new JogoService()
+		jogoService.get().then(
+			result => {
+				const games = result.data.map( g => ({ name: g.nome, image: g.url_imagem }))
+				this.setState({ games, initialGames: games })
+			}
+		)
 	}
 
 	onSearchChange = (event) => {
 		const target = event.target
 
-		const filteredGames = this.state.initialGames.filter(game => game.name.includes(target.value)) 
+		const filteredGames = this.state.initialGames.filter(game => game.name.toLowerCase().includes(target.value.toLowerCase()))
 		this.setState({ games: filteredGames })
 	}
 
@@ -85,7 +77,7 @@ export class GamesScreen extends Component {
 		))
 	}
 
-	render () {
+	render() {
 		return (
 				<Fragment>
 					<h2>Games</h2>
