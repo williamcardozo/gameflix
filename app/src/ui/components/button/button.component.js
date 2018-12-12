@@ -1,9 +1,12 @@
 import React from 'react'
-import './style.scss'
+import './styles.scss'
 
 
-export const Button = (props) => (
-  <button {...props} className={`button ${props.typeClass} ${props.className}`}>
-    {props.children}
-  </button>
-)
+export const Button = (props) => {
+  return (
+    <button className={`button ${props.customStyle} ${props.typeClass}`} onClick={props.onClick} type={props.type}>
+      {props.children}
+    </button>
+  ) 
+}
+  

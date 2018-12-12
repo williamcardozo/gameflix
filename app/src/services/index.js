@@ -1,0 +1,1 @@
+export { JogoService } from './jogo/jogo.service'
