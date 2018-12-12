@@ -11,10 +11,14 @@ export class GamesScreen extends Component {
 		gameImageUrl: '',
 		shouldRenderForm: false
 	}
+	jogoService = new JogoService()
 
 	componentDidMount() {
-		const jogoService = new JogoService()
-		jogoService.get().then(
+		this.getGames()
+	}
+
+	getGames() {
+		this.jogoService.get().then(
 			result => {
 				const games = result.data.map( g => ({ name: g.nome, image: g.url_imagem }))
 				this.setState({ games, initialGames: games })
@@ -41,6 +45,16 @@ export class GamesScreen extends Component {
 
 	addGame = (event) => {
 		event.preventDefault()
+
+		const data = {
+			name: this.state.gameName,
+			imageUrl: this.state.gameImageUrl
+		}
+
+		this.jogoService.addGame(data).then(() =>  {
+			this.setState({ shouldRenderForm: false })	
+			this.getGames()
+		})
 	}
 
 	renderAddForm() {
