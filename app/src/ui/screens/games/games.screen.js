@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { GameCard, Input, Button, Image } from '@components'
 import './styles.scss'
-import { JogoService } from '../../../services/jogo/jogo.service';
+import { JogoService } from '@services';
+import { BaseForm } from './sections/base-form.section'
 
 export class GamesScreen extends Component {
 	state = {
@@ -58,30 +59,23 @@ export class GamesScreen extends Component {
 	}
 
 	renderAddForm() {
+		const { gameName, gameImageUrl } = this.state
 		return (
-			<div className="form-container">
-				<div className="form-container-wrapper">
-					<div>
-						<h3>Novo Jogo</h3>
-						<form className="form-game" onSubmit={this.addGame}>
-								<Input label="Nome" placeholder="Nome do jogo" 
-									type="text" onChange={this.handleChange} value={this.state.gameName}
-									name="gameName"/>
-								<Input label="Url da Imagem" placeholder="Url da Imagem do jogo" 
-									type="text" onChange={this.handleChange} value={this.state.gameImageUrl}
-									name="gameImageUrl"/>
+			<BaseForm title="Novo Jogo" changeAction={this.handleChange} actions={() => (
+				<Button className="add-game-button" typeClass="button-primary" type="submit">
+					<span>Salvar</span>
+				</Button>
+			)} submitAction={this.addGame} gameName={gameName} gameImageUrl={gameImageUrl}/>
+		)
+	}
 
-								<Button className="add-game-button" typeClass="button-primary" type="submit">
-									<span>Salvar</span>
-								</Button>
-
-						</form>
-					</div>
-					<GameCard name={this.state.gameName} image={this.state.gameImageUrl} />		
-				</div>
-			
-				<div className="line"></div>
-			</div>			
+	renderGameDetail() {
+		return (
+			<BaseForm title="Detalhe Jogo" actions={() => (
+				<Button className="add-game-button" typeClass="button-primary" type="submit">
+					<span>Salvar</span>
+				</Button>
+			)} readonly />
 		)
 	}
 
@@ -102,9 +96,9 @@ export class GamesScreen extends Component {
 								<span>{Image.ICONS.Gamepad} Adicionar Jogo</span>
 							</Button>
 						</header>
-						{this.state.shouldRenderForm && this.renderAddForm()}
+						{ this.state.shouldRenderForm && this.renderAddForm() }
 						<section className="games-list">
-							{this.renderGameCard()}
+							{ this.renderGameCard() }
 						</section>
 					</div>
 			</Fragment>
