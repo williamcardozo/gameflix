@@ -3,14 +3,13 @@ import { Image } from '@components'
 import { routes } from './routes'
 import { Link, Route } from 'react-router-dom'
 import './style.scss'
-import { GamesScreen } from '../games/games.screen';
 
 const SidebarHeader = (props) => (
   <header>
     <div className="bottom-content">
       <div className="user">
 
-        <img src="https://i.pinimg.com/originals/76/34/f0/7634f00d8f0e15f697e5cf9fb99a0d47.jpg" />
+        <img src="https://i.pinimg.com/originals/76/34/f0/7634f00d8f0e15f697e5cf9fb99a0d47.jpg" alt="imagem do usuario" />
         <span className="greetings">
           Olá, <span className="name">William!</span>
         </span>
