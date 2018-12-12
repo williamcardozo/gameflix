@@ -6,7 +6,6 @@ export class JogoService extends BaseService {
   }
 
   addGame({name, imageUrl}) {
-    debugger
     const data = {
       nome: name,
       url_imagem: imageUrl
