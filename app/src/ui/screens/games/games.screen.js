@@ -41,7 +41,6 @@ export class GamesScreen extends Component {
 	}
 
 	onGameCardClick  = (game) => {
-		debugger
 		this.setState({ shouldRenderDetail: true, 
 			shouldRenderForm: false,
 			gameName: game.name, 
