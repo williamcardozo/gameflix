@@ -10,6 +10,11 @@ export const routes = [
   {
     path: "/games",
     main: () => <LoggedUserBaseScreen />
+  },
+  ,
+  {
+    path: "/orders",
+    main: () => <LoggedUserBaseScreen />
   }
 ];
   
