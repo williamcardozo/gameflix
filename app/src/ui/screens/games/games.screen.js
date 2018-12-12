@@ -38,6 +38,15 @@ export class GamesScreen extends Component {
 		this.setState({ gameId: '', gameName: '', gameImageUrl: '', renterName: '' })
 	}
 
+	onCloseForm = () => {
+		this.setState({
+			shouldRenderForm: false,
+			shouldRenderDetail: false,
+			shouldRenderEditForm: false,
+			shouldRenderRentForm: false
+		})
+	}
+
 	onSearchChange = (event) => {
 		const target = event.target
 
@@ -146,7 +155,7 @@ export class GamesScreen extends Component {
 				<Button customStyle="game-button" typeClass="primary" type="submit">
 					Salvar
 				</Button>
-			)} submitAction={this.addGame} gameName={gameName} gameImageUrl={gameImageUrl}/>
+			)} submitAction={this.addGame} gameName={gameName} gameImageUrl={gameImageUrl} onCloseForm={this.onCloseForm}/>
 		)
 	}
 
@@ -158,7 +167,7 @@ export class GamesScreen extends Component {
 				<Button customStyle="game-button" typeClass="primary" type="submit">
 					Salvar
 				</Button>
-			)} submitAction={this.editGame} gameName={gameName} gameImageUrl={gameImageUrl} gameId={this.state.gameId}/>
+			)} submitAction={this.editGame} gameName={gameName} gameImageUrl={gameImageUrl} gameId={this.state.gameId} onCloseForm={this.onCloseForm}/>
 		)
 	}
 
@@ -176,7 +185,7 @@ export class GamesScreen extends Component {
 						<span>{Image.ICONS.Close}  Deletar</span>
 					</Button>
 				</div>
-			)} gameName={this.state.gameName} gameImageUrl={this.state.gameImageUrl} gameId={this.state.gameId}/>
+			)} gameName={this.state.gameName} gameImageUrl={this.state.gameImageUrl} gameId={this.state.gameId} onCloseForm={this.onCloseForm}/>
 		)
 	}
 

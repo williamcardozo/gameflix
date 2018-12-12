@@ -8,6 +8,21 @@
     display: flex;
     align-items: center; 
 
+    .form-container-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+
+      span {
+        width: 25px;
+
+        svg {
+          fill: $secondary;
+        }
+      }
+    }
+
     .form-game {
       width: 300px;
       margin-bottom: 20px;

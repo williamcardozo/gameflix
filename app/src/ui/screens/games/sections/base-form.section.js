@@ -1,22 +1,26 @@
 import React from 'react'
-import { GameCard, Input } from '@components'
+import { GameCard, Input, Image } from '@components'
 import './styles.scss'
 
 export const BaseForm = ({
-	title, 
-	actions, 
-	readOnly, 
-	submitAction, 
-	changeAction, 
-	gameName, 
-  gameImageUrl, 
-  gameId
-}) =>  {
-	return (
-		<div className="form-container">
-			<div className="form-container-wrapper">
-				<div>
-					<h3>{title}</h3>
+  title,
+  actions,
+  readOnly,
+  submitAction,
+  changeAction,
+  gameName,
+  gameImageUrl,
+	gameId,
+	onCloseForm,
+}) => {
+  return (
+    <div className="form-container">
+      <div className="form-container-wrapper">
+        <div>
+          <div className="form-container-header">
+            <h3>{title}</h3>
+            {onCloseForm && <span onClick={() => onCloseForm()}>{Image.ICONS.Close}</span>}
+          </div>
 					<form className="form-game" onSubmit={submitAction}>
             <Input hidden="true" readOnly hidden value={gameId} name="gameId"/>
 						<Input readOnly={readOnly} label="Nome" placeholder="Nome do jogo" 
